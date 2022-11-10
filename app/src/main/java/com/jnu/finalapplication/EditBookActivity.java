@@ -51,6 +51,12 @@ public class EditBookActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditBookActivity.this.finish();
+            }
+        });
     }
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
@@ -65,11 +71,6 @@ public class EditBookActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-
-            // message response for close
-            case android.R.id.home:
-                EditBookActivity.this.finish();
-
             // message reponse for SAVE
             case R.id.save:
                 save();

@@ -2,6 +2,7 @@ package com.jnu.finalapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -99,8 +100,19 @@ public class BookListMainActivity extends AppCompatActivity {
         myRecyclerView=(RecyclerView) findViewById(R.id.recycle_view_books);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         myRecyclerView.setAdapter(myAdapter=new RecyclerAdapter());
-
         registerForContextMenu(findViewById(R.id.recycle_view_books));
+
+        // activate toolbar menu button
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarmain);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(BookListMainActivity.this,"MENU",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     protected void initData(){
 
@@ -128,13 +140,6 @@ public class BookListMainActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         switch (item.getItemId()){
-//            case R.id.add:
-//                Intent intent=new Intent(this,EditBookActivity.class);
-//                Toast.makeText(this,"add",Toast.LENGTH_SHORT).show();
-//                intent.putExtra("Action","Add");
-//                startActivityForResult(intent,0);
-//                break;
-
             case R.id.delete:
                 Toast.makeText(this,"delete",Toast.LENGTH_SHORT).show();
                 Booklist.remove(mPosition);
