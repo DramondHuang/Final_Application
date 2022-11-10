@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="top"
+    tools:context=".EditBookActivity"
+    tools:layout_editor_absoluteX="-7dp"
+    tools:layout_editor_absoluteY="0dp">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbaredit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:navigationIcon="@drawable/cross"
+        app:title="Edit Book Details"
+        app:titleTextColor="@color/white"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="269dp"
+        android:layout_gravity="center"
+        android:gravity="left"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageViewcover"
+            android:layout_width="117dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/book_no_name" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewtitle"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="Title"
+                    tools:layout_editor_absoluteY="103dp" />
+
+                <EditText
+                    android:id="@+id/editTexttitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:text="title"
+                    tools:layout_editor_absoluteY="41dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewauthor"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="Author"
+                    tools:layout_editor_absoluteY="200dp" />
+
+                <EditText
+                    android:id="@+id/editTextauthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:text="author"
+                    tools:layout_editor_absoluteX="147dp"
+                    tools:layout_editor_absoluteY="95dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewtranslator"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Translator"
+                    tools:layout_editor_absoluteY="155dp" />
+
+                <EditText
+                    android:id="@+id/editTexttranslator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:text="translator"
+                    tools:layout_editor_absoluteY="140dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewpublisher"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Publisher"
+                    tools:layout_editor_absoluteY="155dp" />
+
+                <EditText
+                    android:id="@+id/editTextpublisher"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:text="publisher"
+                    tools:layout_editor_absoluteY="140dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewpubdate"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="PubDate"
+                    tools:layout_editor_absoluteY="155dp" />
+
+                <EditText
+                    android:id="@+id/editTextpubdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:text="pubdate"
+                    tools:layout_editor_absoluteY="140dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textViewisbn"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="ISBN"
+                    tools:layout_editor_absoluteY="58dp" />
+
+                <EditText
+                    android:id="@+id/editTextTextisbn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:inputType="textPersonName"
+                    android:text="ISBN"
+                    tools:layout_editor_absoluteX="187dp"
+                    tools:layout_editor_absoluteY="186dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
