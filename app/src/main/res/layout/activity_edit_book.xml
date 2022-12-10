@@ -185,6 +185,113 @@
                     tools:layout_editor_absoluteX="187dp"
                     tools:layout_editor_absoluteY="186dp" />
             </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DETAILS"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="一一一一一一一一一一一一一一一一一一一一一一一一一一" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/tag"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:text="Tag" />
+            <EditText
+                android:id="@+id/editTextTag"
+                android:gravity="center"
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:text="No Tag"
+                android:drawableRight="@drawable/arrow"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/bookshelf"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:text="Bookshelf" />
+            <EditText
+                android:id="@+id/editTextShelf"
+                android:gravity="center"
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:text="No Bookshelf"
+                android:drawableRight="@drawable/arrow"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/note"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"
+                android:text="Note" />
+            <EditText
+                android:id="@+id/editTextNote"
+                android:gravity="center"
+                android:layout_width="240dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

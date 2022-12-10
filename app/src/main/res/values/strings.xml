@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Final Application</string>
+    <string-array name="taglist">
+        <item>tag1</item>
+        <item>tag2</item>
+        <item>tag3</item>
+    </string-array>
+    <string-array name="shelflist">
+        <item>shelf1</item>
+        <item>shelf2 </item>
+        <item>shelf3</item>
+
+    </string-array>
 </resources>
