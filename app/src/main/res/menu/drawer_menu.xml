@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_tag"
+        android:icon="@drawable/tag"
+        android:title="选择标签Tag">
+    </item>
+    <item
+        android:id="@+id/nav_shelf"
+        android:icon="@drawable/bookshelf"
+        android:title="选择书架Bookshelf">
+    </item>
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/search"
+        android:title="查找书本">
+
+    </item>
+
+</menu>

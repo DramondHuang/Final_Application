@@ -1,11 +1,14 @@
 package com.jnu.finalapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +21,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListPopupWindow;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -30,6 +35,10 @@ public class EditBookActivity extends AppCompatActivity {
     int mresultcode;
     EditText tag,shelf;
     String[] taglist,shelflist;
+    String bookJson,getbookJson;
+    Handler handler;
+    String urlCover;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,29 +98,6 @@ public class EditBookActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-    }
-    private void showListPopulWindow(String[] list,EditText edit){
-        ListPopupWindow listPopupWindow = new ListPopupWindow(this);
-        listPopupWindow.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, list));
-        listPopupWindow.setAnchorView(tag);
-        listPopupWindow.setModal(true);
-        listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                edit.setText(list[i]);
-                listPopupWindow.dismiss();
-            }
-        });
-        listPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-                edit.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.arrow), null);
-            }
-        });
-        listPopupWindow.show();
-
     }
     protected void initData(){
         intent=getIntent();
@@ -131,22 +117,78 @@ public class EditBookActivity extends AppCompatActivity {
         taglist = (String[])gettaglist.toArray(new String[gettaglist.size()]);
 
         ArrayList<String> getshelflist=intent.getStringArrayListExtra("shelflist");
-        shelflist = (String[])gettaglist.toArray(new String[gettaglist.size()]);
+        shelflist = (String[])getshelflist.toArray(new String[getshelflist.size()]);
 
-        if(Objects.equals(intent.getStringExtra("Action"), "Edit")) {
+        if(intent.getStringExtra("Action").equals("Edit")) {
             editTitle.setText(intent.getStringExtra("title"));
             editAuthor.setText(intent.getStringExtra("author"));
             editISBN.setText(intent.getStringExtra("isbn"));
             editPubdate.setText(intent.getStringExtra("pubdate"));
             editTranslator.setText(intent.getStringExtra("translator"));
             editPublisher.setText(intent.getStringExtra("publisher"));
-            editPicture.setImageResource(intent.getIntExtra("picture",R.drawable.book_no_name));
+            new BookLoader().setCover(intent.getStringExtra("picture"),editPicture);
             editTag.setText(intent.getStringExtra("tag"));
             editBookshelf.setText(intent.getStringExtra("bookshelf"));
             editNote.setText(intent.getStringExtra("note"));
             mresultcode =2;
         }
+        if (intent.getStringExtra("Action").equals("Scan")){
+            mresultcode=3;
+            String apiurl=intent.getStringExtra("apiurl");
+            handler = new Handler() {
+                public void handleMessage(@NonNull Message msg) {
+                    //主线程接受子线程发送的信息
+                    Book book=(Book)msg.obj;
+                    editTitle.setText(book.title);
+                    editAuthor.setText(book.author);
+                    editISBN.setText(book.isbn);
+                    editPubdate.setText(book.pubdate);
+                    editTranslator.setText(book.translator);
+                    editPublisher.setText(book.publisher);
+                    new BookLoader().setCover(book.cover,editPicture);
+                    urlCover=book.cover;
+                }
+            };
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        bookJson = new BookLoader().downloadjson(apiurl);
+                        Book book=new BookLoader().parsonJson(bookJson);
+                        //使用Handler向主线程发送消息
+                        Message msg = new Message();
+                        msg.obj = book;
+                        msg.what = 1;
+                        handler.sendMessage(msg);
+                    } catch (InterruptedException | IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
     }
+    private void showListPopulWindow(String[] list,EditText edit){
+        ListPopupWindow listPopupWindow = new ListPopupWindow(this);
+        listPopupWindow.setAdapter(new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, list));
+        listPopupWindow.setAnchorView(edit);
+        listPopupWindow.setModal(true);
+        listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                edit.setText(list[i]);
+                listPopupWindow.dismiss();
+            }
+        });
+        listPopupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                edit.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.arrow), null);
+            }
+        });
+        listPopupWindow.show();
+    }
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
@@ -179,10 +221,12 @@ public class EditBookActivity extends AppCompatActivity {
         intent.putExtra("author", editAuthor.getText().toString());
         intent.putExtra("publisher", editPublisher.getText().toString());
         intent.putExtra("pubdate", editPubdate.getText().toString());
+        intent.putExtra("translator", editTranslator.getText().toString());
         intent.putExtra("isbn", editISBN.getText().toString());
         intent.putExtra("tag", editTag.getText().toString());
         intent.putExtra("bookshelf", editBookshelf.getText().toString());
         intent.putExtra("note", editNote.getText().toString());
+        intent.putExtra("cover",urlCover);
 
         EditBookActivity.this.setResult(mresultcode, intent);
         EditBookActivity.this.finish();
