@@ -113,7 +113,7 @@ public class BookListMainActivity extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences("name", 0);
         boolean firstStart = settings.getBoolean("firstStart", true);
 
-        if(true) {
+        if(firstStart) {
             Book Book1= new Book("炒股的智慧", "https://s1.ax1x.com/2022/12/12/z4Ggkq.jpg","陈江挺","2019-01",""," 商务印书馆","9787100166874","股票","金融","在华尔街炒股为生的体验");
             Book Book2= new Book("笑傲牛熊", "https://s1.ax1x.com/2022/12/12/z4G2t0.jpg","[美]史丹•温斯坦(Stan Weinstein)，","2021-03","亦明","中国人民大学出版社","9787300288987","股票","金融","将复杂的技术分析转化为简单易行的操作体系");
             Book Book3= new Book("债券博弈","https://s1.ax1x.com/2022/12/12/z4GfpT.jpg","王静波/于洪晨","2014-08","","中国人民大学出版社","9787300195780","债券","金融","弄潮国际债券市场的中国企业");
@@ -137,10 +137,10 @@ public class BookListMainActivity extends AppCompatActivity {
             editor.putBoolean("firstStart", false);
             editor.commit();
 
-            taglist = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.taglist)));
-            shelflist = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.shelflist)));
+                taglist = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.taglist)));
+                shelflist = new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.shelflist)));
 
-        }
+            }
 
     }
     //For add button
@@ -290,7 +290,6 @@ public class BookListMainActivity extends AppCompatActivity {
             switch (resultCode) {
                 case 1:         // add new book
                     Book addedbook = new Book(title,"https://s1.ax1x.com/2022/12/12/z41pFK.jpg" , author, pubdate,translator,publisher,isbn,tag,bookshelf,note);
-
                     //modify adapter
                     tempBooklist.add(addedbook);
                     myAdapter.displayBooklist=tempBooklist;

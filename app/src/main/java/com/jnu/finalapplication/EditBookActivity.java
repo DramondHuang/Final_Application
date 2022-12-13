@@ -35,7 +35,7 @@ public class EditBookActivity extends AppCompatActivity {
     int mresultcode;
     EditText tag,shelf;
     String[] taglist,shelflist;
-    String bookJson,getbookJson;
+    String bookJson;
     Handler handler;
     String urlCover;
 
